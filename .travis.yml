@@ -1,0 +1,12 @@
+dist: xenial
+language: node_js
+node_js: 12
+install: npm ci
+matrix:
+  include:
+    - name: "Tests"
+      script: npm test
+    - name: "Lint"
+      script: npm run lint
+    - name: "Build"
+      script: npm run build
