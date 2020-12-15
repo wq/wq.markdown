@@ -13,7 +13,7 @@ npm install @wq/markdown
 
 ## API
 
-By default, @wq/markdown looks for a `markdown` property on the current context.  If present, the included [view overrides] will render the Markdown with [react-markdown] and [react-syntax-highlighter].  @wq/markdown specifies [@wq/material]-based renderers like `<Typography/>` for the main block types, and automatically distinguishes between internal [@wq/router]-handled) <Link/>s and external `<a href/>`s.  @wq/markdown can be configured to look for a different `input` context variable, or the exported `<Markdown/>` component can be used in a custom view.
+By default, @wq/markdown looks for a `markdown` property on the current context.  If present, the included [view overrides] will render the Markdown with [react-markdown] and [react-syntax-highlighter].  @wq/markdown specifies [@wq/material]-based renderers like `<Typography/>` for the main block types, and automatically distinguishes between internal [@wq/router]-handled `<Link/>`s and external `<a href/>`s.  @wq/markdown can be configured to look for a different `input` context variable, or the exported `<Markdown/>` component can be used in a custom view.
 
 ### Usage
 
@@ -35,7 +35,7 @@ app.init(config).then(...);
 [@wq/app]: https://wq.io/docs/app-js
 [@wq/markdown 1.x]: https://github.com/wq/markdown/tree/1.x
 [@wq/material]: https://github.com/wq/wq.app/tree/master/packages/material
-[@wq/jquery-mobile]: https://github.com/wq/wq.app/tree/master/packages/jeuery-mobile
+[@wq/jquery-mobile]: https://github.com/wq/wq.app/tree/master/packages/jquery-mobile
 [react-markdown]: https://github.com/remarkjs/react-markdown
 [react-syntax-highlighter]: https://github.com/react-syntax-highlighter/react-syntax-highlighter
 [view overrides]: https://github.com/wq/wq.app/tree/master/packages/material
