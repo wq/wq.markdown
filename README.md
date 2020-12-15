@@ -1,7 +1,7 @@
 @wq/markdown
 ==============
 
-**@wq/markdown** is a [@wq/app plugin][@wq/app] that adds Markdown and syntax highlighting capabilities to the template rendering [context].
+**@wq/markdown** is a [@wq/app plugin][@wq/app] that adds Markdown and syntax highlighting capabilities to the renderer.
 
 ## Installation
 
@@ -9,35 +9,34 @@
 npm install @wq/markdown
 ```
 
-> Note: @wq/markdown is meant to be used with [@wq/app for npm][@wq/app].  As of wq.app 1.2, @wq/markdown is no longer included in the [wq.app PyPI package][wq.app].
+> Note: As of version 2.0, @wq/markdown is only compatible with the [@wq/material] renderer.   To integrate with the classic [@wq/jquery-mobile] renderer, install [@wq/markdown 1.x].
 
 ## API
 
-By default, @wq/markdown looks for a `markdown` property on the current context and outputs an `html` property that can be rendered into the template as `{{{html}}}`.  @wq/markdown can optionally be configured to look for a different `input` context variable or a different `output` variable.  It can also be configured with a custom `postProcess` function before returning the final HTML.
+By default, @wq/markdown looks for a `markdown` property on the current context.  If present, the included [view overrides] will render the Markdown with [react-markdown] and [react-syntax-highlighter].  @wq/markdown specifies [@wq/material]-based renderers like `<Typography/>` for the main block types, and automatically distinguishes between internal [@wq/router]-handled) <Link/>s and external `<a href/>`s.  @wq/markdown can be configured to look for a different `input` context variable, or the exported `<Markdown/>` component can be used in a custom view.
 
 ### Usage
 
 ```javascript
 // src/index.js
 import app from '@wq/app';
-import md from '@wq/markdown';
+import markdown from '@wq/markdown';
 import config from './config';
 
 // In src/config.js:
-// config.markdown = {'input': 'markdown', 'output': 'html'};
-// config.markdown.postProcess = function(html) { return html };
+// config.markdown = {'input': 'markdown' };
 
-app.use(md);
-app.init(config).then(function() {
-    app.jqmInit();
-    app.prefetchAll();
-});
+app.use(markdown);
+app.init(config).then(...);
 ```
 
-@wq/markdown uses [marked] for Markdown processing and [highlight.js] for code syntax highlighting.  The parsers for Bash, CSS, JavaScript, Markdown, Python, SCSS, and XML are included by default.
+@wq/markdown includes the react-markdown highlight.js parsers for Bash, JavaScript, Python, and XML.
 
 [@wq/app]: https://wq.io/docs/app-js
-[wq.app]: https://wq.io/wq.app
-[context]: https://wq.io/docs/router-js
-[marked]: https://marked.js.org/
-[highlight.js]: https://highlightjs.org/
+[@wq/markdown 1.x]: https://github.com/wq/markdown/tree/1.x
+[@wq/material]: https://github.com/wq/wq.app/tree/master/packages/material
+[@wq/jquery-mobile]: https://github.com/wq/wq.app/tree/master/packages/jeuery-mobile
+[react-markdown]: https://github.com/remarkjs/react-markdown
+[react-syntax-highlighter]: https://github.com/react-syntax-highlighter/react-syntax-highlighter
+[view overrides]: https://github.com/wq/wq.app/tree/master/packages/material
+[@wq/router]: https://wq.io/docs/router-js

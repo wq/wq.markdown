@@ -1,7 +1,14 @@
-import babel from 'rollup-plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
 import pkg from './package.json';
+import wq from '@wq/rollup-plugin';
+import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
+import json from '@rollup/plugin-json';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
+import { terser } from 'rollup-plugin-terser';
+import analyze from 'rollup-plugin-analyzer';
+
 const banner = `/*
  * ${pkg.name} ${pkg.version}
  * ${pkg.description}
@@ -10,106 +17,56 @@ const banner = `/*
  */
 `;
 
-export default [
-    // ESM
-    {
-        input: 'index.js',
+const config = {
+        input: 'src/index.js',
         plugins: [
+            wq(),
+            nodePolyfills(),
             babel({
-                configFile: false,
-                presets: [
-                    [
-                        '@babel/preset-env',
-                        {
-                            targets: {
-                                esmodules: true
-                            }
-                        }
-                    ]
-                ]
-            })
-        ],
-        external: id => id === 'marked' || id.match(/^highlight\.js\/./),
-        output: {
-            banner,
-            file: 'dist/index.es.js',
-            format: 'esm'
-        }
-    },
-    // CJS
-    {
-        input: 'index.js',
-        plugins: [
-            babel({
-                configFile: false,
-                presets: [
-                    [
-                        '@babel/preset-env',
-                        {
-                            targets: {
-                                node: 8
-                            }
-                        }
-                    ]
-                ]
-            })
-        ],
-        external: id => id === 'marked' || id.match(/^highlight\.js\/./),
-        output: {
-            banner,
-            file: 'dist/index.js',
-            format: 'cjs'
-        }
-    },
-
-    // UMD
-    {
-        input: 'index.js',
-        plugins: [
-            babel({
-                configFile: false,
-                presets: [
-                    [
-                        '@babel/preset-env',
-                        {
-                            targets: {
-                                esmodules: true
-                            }
-                        }
-                    ]
-                ]
+                plugins: ['@babel/transform-react-jsx'],
+                babelHelpers: 'inline',
             }),
-            {
-                resolveId(source) {
-                    if (source === './highlight') {
-                        return { id: './highlight', external: true };
-                    }
-                }
-            }
+            commonjs(),
+            resolve(),
+            terser(),
+            json(),
+            analyze({ limit: 10 }),
         ],
-        external: ['marked'],
-        output: [
-            {
-                name: 'chart',
-                globals: { marked: 'marked', './highlight': 'hljs' },
-                banner,
-                file: 'dist/markdown.js',
-                format: 'umd',
-                sourcemap: true,
-                indent: false
-            }
-        ]
+        output: {
+            file: 'markdown.js',
+            banner,
+            format: 'esm',
+            sourcemap: true,
+        },
+    },
+    replaceConfig = {
+        'process.env.NODE_ENV': '"production"',
+        'proc.cwd()': '""',
+        'module.exports = browser$1;': '',
+        delimiters: ['', ''],
+    };
+
+export default [
+    {
+        ...config,
+        plugins: [
+            replace({
+                ...replaceConfig,
+                './wq.js': 'https://unpkg.com/wq',
+            }),
+            ...config.plugins,
+        ],
+        output: {
+            ...config.output,
+            file: 'markdown.js',
+            sourcemapPathTransform(path) {
+                return path.replace('./', 'wq/markdown/');
+            },
+        },
     },
     {
-        input: 'src/highlight.js',
-        plugins: [commonjs(), resolve()],
-        output: [
-            {
-                name: 'hljs',
-                file: 'dist/highlight.js',
-                format: 'umd',
-                indent: false
-            }
-        ]
-    }
+        ...config,
+        plugins: [replace(replaceConfig), ...config.plugins],
+        output: { ...config.output, file: 'static/app/js/markdown.js' },
+    },
 ];

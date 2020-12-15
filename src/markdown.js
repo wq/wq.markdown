@@ -4,7 +4,7 @@ import highlight from './highlight';
 // Exported module object
 var md = {};
 
-md.init = function(config) {
+md.init = function (config) {
     if (!config) {
         config = {};
     }
@@ -19,7 +19,7 @@ md.init = function(config) {
     md.config = config;
 };
 
-md.context = function(context) {
+md.context = function (context) {
     var output = '';
     if (context[md.config.input]) {
         output = md.parse(context[md.config.input]);
@@ -30,12 +30,12 @@ md.context = function(context) {
 };
 
 // Parsing function (can be used directly)
-md.parse = function(value) {
+md.parse = function (value) {
     return md.postProcess(marked.parse(value));
 };
 
 // Override with custom post-processing function
-md.postProcess = function(html) {
+md.postProcess = function (html) {
     if (md.config.postProcess) {
         return md.config.postProcess(html);
     } else {
@@ -45,14 +45,14 @@ md.postProcess = function(html) {
 
 // Connect markdown processor to code highlighter
 marked.setOptions({
-    highlight: function(code, lang) {
+    highlight: function (code, lang) {
         return highlight.highlight(lang, code).value;
-    }
+    },
 });
 
 // Run for server-rendered markdown
-md.run = function($page) {
-    $page.find('pre code:not(.hljs)').each(function(i, el) {
+md.run = function ($page) {
+    $page.find('pre code:not(.hljs)').each(function (i, el) {
         highlight.highlightBlock(el);
     });
 };
