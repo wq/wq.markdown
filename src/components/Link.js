@@ -28,6 +28,12 @@ export default function Link({ node, href, children, ...props }) {
                 />
             </WQLink>
         );
+    } else if (href.startsWith('#')) {
+        return (
+            <WQLink {...props} href={href} component="a">
+                {children}
+            </WQLink>
+        );
     } else {
         return (
             <WQLink {...props} to={href}>
