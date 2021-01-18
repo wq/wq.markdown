@@ -28,7 +28,7 @@ const config = {
             }),
             commonjs(),
             resolve(),
-            terser(),
+            terser({ keep_fnames: /^([A-Z]|use[A-Z])/ }), // Preserve component & hook names
             json(),
             analyze({ limit: 10 }),
         ],

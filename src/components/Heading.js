@@ -12,7 +12,10 @@ export default function Heading({ node, children, ...props }) {
     };
     let id;
     if (props.level > 1 && node.children[0].type === 'text') {
-        id = node.children[0].value.toLowerCase().replace(/\W+/g, '-');
+        id = node.children[0].value
+            .toLowerCase()
+            .replace(/[^\w\- ]/g, '')
+            .replace(/ +/g, '-');
     }
     return (
         <Typography
