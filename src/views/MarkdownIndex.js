@@ -1,5 +1,6 @@
 import React from 'react';
-import react, {
+import {
+    Index as DefaultIndex,
     useRenderContext,
     usePlugin,
     useApp,
@@ -9,8 +10,6 @@ import react, {
 } from '@wq/react';
 import { View, List, ListItemLink, ListSubheader } from '@wq/material';
 import Markdown from './Markdown';
-
-const { Index: DefaultIndex } = react.config.views;
 
 export default function MarkdownIndex() {
     const {

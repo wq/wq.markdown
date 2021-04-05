@@ -1,17 +1,22 @@
 import React from 'react';
-import react, { useRenderContext, usePlugin } from '@wq/react';
+import { DefaultDetail, useRenderContext, usePlugin } from '@wq/react';
+import { Fab } from '@wq/material';
 import Markdown from './Markdown';
-
-const { DefaultDetail } = react.config.views;
 
 export default function MarkdownDetail() {
     const {
-            config: { input },
+            config: { input, getEditUrl },
         } = usePlugin('markdown'),
-        context = useRenderContext();
+        context = useRenderContext(),
+        editUrl = getEditUrl(context.router_info);
 
     if (input in context) {
-        return <Markdown />;
+        return (
+            <>
+                <Markdown />
+                {editUrl && <Fab icon="edit" component="a" href={editUrl} />}
+            </>
+        );
     } else {
         return <DefaultDetail />;
     }

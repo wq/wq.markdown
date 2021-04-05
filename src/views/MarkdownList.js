@@ -1,26 +1,29 @@
 import React from 'react';
-import react, {
+import {
+    DefaultList,
     useRenderContext,
     usePlugin,
     useList,
     useReverse,
 } from '@wq/react';
-import { View, ListItemLink, Chip, List } from '@wq/material';
+import { View, ListItemLink, Chip, List, Fab } from '@wq/material';
 import Markdown from './Markdown';
-
-const { DefaultList } = react.config.views;
 
 export default function MarkdownList() {
     const {
-            config: { input, autoindex, tags },
+            config: { input, autoindex, tags, getNewUrl },
         } = usePlugin('markdown'),
-        context = useRenderContext();
+        context = useRenderContext(),
+        newUrl = getNewUrl(context.router_info);
 
     if (input in context) {
         return (
-            <Markdown>
-                {context[autoindex] !== false && <PageList tags={tags} />}
-            </Markdown>
+            <>
+                <Markdown>
+                    {context[autoindex] !== false && <PageList tags={tags} />}
+                </Markdown>
+                {newUrl && <Fab icon="add" component="a" href={newUrl} />}
+            </>
         );
     } else {
         return <DefaultList />;

@@ -10,6 +10,8 @@ export default {
         input: 'markdown',
         autoindex: 'autoindex',
         tags: 'tags',
+        getNewUrl() {},
+        getEditUrl() {},
     },
     init(config) {
         if (config) {
