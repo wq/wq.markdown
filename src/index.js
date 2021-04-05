@@ -22,8 +22,8 @@ export default {
             const context = {
                 [input]: routeInfo.page_config[input],
             };
-            if (!(autoindex in ctx)) {
-                context[autoindex] = routeInfo.page_config[autoindex] || true;
+            if (autoindex in routeInfo.page_config && !(autoindex in ctx)) {
+                context[autoindex] = routeInfo.page_config[autoindex];
             }
             return context;
         }
