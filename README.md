@@ -32,11 +32,11 @@ app.init(config).then(...);
 
 @wq/markdown includes the react-markdown highlight.js parsers for Bash, JavaScript, Python, and XML.
 
-[@wq/app]: https://wq.io/docs/app-js
+[@wq/app]: https://wq.io/@wq/app
 [@wq/markdown 1.x]: https://github.com/wq/markdown/tree/1.x
-[@wq/material]: https://github.com/wq/wq.app/tree/master/packages/material
+[@wq/material]: https://wq.io/@wq/material
 [@wq/jquery-mobile]: https://github.com/wq/wq.app/tree/master/packages/jquery-mobile
 [react-markdown]: https://github.com/remarkjs/react-markdown
 [react-syntax-highlighter]: https://github.com/react-syntax-highlighter/react-syntax-highlighter
 [view overrides]: https://github.com/wq/wq.app/tree/master/packages/material
-[@wq/router]: https://wq.io/docs/router-js
+[@wq/router]: https://wq.io/@wq/router
