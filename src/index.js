@@ -1,15 +1,15 @@
-import Markdown from './views/Markdown';
-import MarkdownIndex from './views/MarkdownIndex';
-import MarkdownDetail from './views/MarkdownDetail';
-import MarkdownList from './views/MarkdownList';
-import renderers from './renderers';
+import Markdown from "./views/Markdown";
+import MarkdownIndex from "./views/MarkdownIndex";
+import MarkdownDetail from "./views/MarkdownDetail";
+import MarkdownList from "./views/MarkdownList";
+import renderers from "./renderers";
 
 export default {
-    name: 'markdown',
+    name: "markdown",
     config: {
-        input: 'markdown',
-        autoindex: 'autoindex',
-        tags: 'tags',
+        input: "markdown",
+        autoindex: "autoindex",
+        tags: "tags",
         getNewUrl() {},
         getEditUrl() {},
     },

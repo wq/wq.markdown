@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import gfm from 'remark-gfm';
-import { List, View, ScrollView } from '@wq/material';
-import { useRenderContext, usePlugin } from '@wq/react';
+import React from "react";
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
+import { List, View, ScrollView } from "@wq/material";
+import { useRenderContext, usePlugin } from "@wq/react";
 
-import renderers from '../renderers';
+import renderers from "../renderers";
 
 export default function Markdown({ children }) {
     const {
             config: { input },
-        } = usePlugin('markdown'),
+        } = usePlugin("markdown"),
         context = useRenderContext(),
         markdown =
             context[input] ||
@@ -19,17 +19,17 @@ export default function Markdown({ children }) {
         <ScrollView>
             <View
                 style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
                 }}
             >
                 <List
                     component="div"
                     style={{
-                        width: '100%',
+                        width: "100%",
                         maxWidth: 1000,
-                        padding: '1em 2em',
+                        padding: "1em 2em",
                     }}
                 >
                     <ReactMarkdown renderers={renderers} plugins={[gfm]}>

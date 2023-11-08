@@ -1,12 +1,12 @@
-import React from 'react';
-import { DefaultDetail, useRenderContext, usePlugin } from '@wq/react';
-import { Fab } from '@wq/material';
-import Markdown from './Markdown';
+import React from "react";
+import { DefaultDetail, useRenderContext, usePlugin } from "@wq/react";
+import { Fab } from "@wq/material";
+import Markdown from "./Markdown";
 
 export default function MarkdownDetail() {
     const {
             config: { input, getEditUrl },
-        } = usePlugin('markdown'),
+        } = usePlugin("markdown"),
         context = useRenderContext(),
         editUrl = getEditUrl(context.router_info);
 

@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, Table as MTable } from '@wq/material';
+import React from "react";
+import { View, Table as MTable } from "@wq/material";
 
 export default function Table(props) {
     return (
-        <View style={{ overflowX: 'auto' }}>
+        <View style={{ overflowX: "auto" }}>
             <MTable {...props} />
         </View>
     );

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Typography } from '@wq/material';
+import React from "react";
+import { Typography } from "@wq/material";
 
 /*eslint no-unused-vars: ["error", { "ignoreRestSiblings": true }]*/
 export default function Paragraph({ node, ...props }) {

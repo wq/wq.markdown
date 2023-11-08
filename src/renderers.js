@@ -1,12 +1,12 @@
-import Root from './components/Root';
-import Paragraph from './components/Paragraph';
-import Heading from './components/Heading';
-import Blockquote from './components/Blockquote';
-import Link from './components/Link';
-import Code from './components/Code';
-import Table from './components/Table';
-import TableCell from './components/TableCell';
-import { TableHead, TableBody, TableRow } from '@wq/material';
+import Root from "./components/Root";
+import Paragraph from "./components/Paragraph";
+import Heading from "./components/Heading";
+import Blockquote from "./components/Blockquote";
+import Link from "./components/Link";
+import Code from "./components/Code";
+import Table from "./components/Table";
+import TableCell from "./components/TableCell";
+import { TableHead, TableBody, TableRow } from "@wq/material";
 
 export default {
     paragraph: Paragraph,

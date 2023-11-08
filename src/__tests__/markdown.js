@@ -1,4 +1,4 @@
 // FIXME
-test('markdown & syntax highlighting', () => {
+test("markdown & syntax highlighting", () => {
     expect(true).toBeTruthy();
 });

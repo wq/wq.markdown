@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
     Index as DefaultIndex,
     useRenderContext,
@@ -7,20 +7,20 @@ import {
     useSitemap,
     useReverse,
     useRouteTitle,
-} from '@wq/react';
+} from "@wq/react";
 import {
     View,
     List,
     ListItemLink,
     ListSubheader,
     ExpandableListItem,
-} from '@wq/material';
-import Markdown from './Markdown';
+} from "@wq/material";
+import Markdown from "./Markdown";
 
 export default function MarkdownIndex() {
     const {
             config: { input, autoindex },
-        } = usePlugin('markdown'),
+        } = usePlugin("markdown"),
         context = useRenderContext();
 
     if (input in context) {
@@ -41,7 +41,7 @@ function Index() {
         .filter((page) => page.show_in_index !== false)
         .sort(orderSort)
         .forEach((page) => {
-            const section = getArray(sections, page.section || ''),
+            const section = getArray(sections, page.section || ""),
                 lastPage = section[section.length - 1],
                 route = page.list ? `${page.name}_list` : page.name;
 
@@ -102,7 +102,7 @@ function Index() {
                             >
                                 {page.label}
                             </ListItemLink>
-                        )
+                        ),
                     )}
                 </>
             ))}

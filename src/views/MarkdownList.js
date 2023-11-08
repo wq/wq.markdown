@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 import {
     DefaultList,
     useRenderContext,
     usePlugin,
     useList,
     useReverse,
-} from '@wq/react';
-import { View, ListItemLink, Chip, List, Fab } from '@wq/material';
-import Markdown from './Markdown';
+} from "@wq/react";
+import { View, ListItemLink, Chip, List, Fab } from "@wq/material";
+import Markdown from "./Markdown";
 
 export default function MarkdownList() {
     const {
             config: { input, autoindex, tags, getNewUrl },
-        } = usePlugin('markdown'),
+        } = usePlugin("markdown"),
         context = useRenderContext(),
         newUrl = getNewUrl(context.router_info);
 
@@ -42,7 +42,7 @@ function PageList({ tags }) {
                     icon={item.icon}
                 >
                     {item[tags] ? (
-                        <View style={{ display: 'flex' }}>
+                        <View style={{ display: "flex" }}>
                             <span style={{ flex: 1 }}>{item.label}</span>
                             <View>
                                 {item[tags].map((tag) => (
