@@ -2,7 +2,7 @@ import Markdown from "./views/Markdown";
 import MarkdownIndex from "./views/MarkdownIndex";
 import MarkdownDetail from "./views/MarkdownDetail";
 import MarkdownList from "./views/MarkdownList";
-import renderers from "./renderers";
+import components from "./components";
 
 export default {
     name: "markdown",
@@ -38,4 +38,4 @@ export default {
     },
 };
 
-export { Markdown, MarkdownIndex, MarkdownDetail, renderers };
+export { Markdown, MarkdownIndex, MarkdownDetail, components };

@@ -1,7 +1,18 @@
 import React from "react";
 import SyntaxHighlighter from "./SyntaxHighlighter";
 
-export default function Code({ language, value }) {
+export default function Code({ children, className, ...rest }) {
+    const language =
+        className && className.startsWith("language-")
+            ? className.replace("language-", "")
+            : null;
+    if (!language) {
+        return (
+            <code {...rest} className={className}>
+                {children}
+            </code>
+        );
+    }
     return (
         <SyntaxHighlighter
             language={language}
@@ -11,7 +22,7 @@ export default function Code({ language, value }) {
                 border: "1px solid #eef",
             }}
         >
-            {value}
+            {children}
         </SyntaxHighlighter>
     );
 }

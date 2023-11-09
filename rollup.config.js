@@ -1,18 +1,16 @@
-import pkg from "./package.json";
+import pkg from "./package.json" assert { type: "json" };
 import wq from "@wq/rollup-plugin";
 import babel from "@rollup/plugin-babel";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
-import json from "@rollup/plugin-json";
-import nodePolyfills from "rollup-plugin-node-polyfills";
-import { terser } from "rollup-plugin-terser";
-import analyze from "rollup-plugin-analyzer";
+import terser from "@rollup/plugin-terser";
+import analyze from "rollup-plugin-analyze";
 
 const banner = `/*
  * ${pkg.name} ${pkg.version}
  * ${pkg.description}
- * (c) 2013-2020, S. Andrew Sheppard
+ * (c) 2013-2023, S. Andrew Sheppard
  * https://wq.io/license
  */
 `;
@@ -21,7 +19,6 @@ const config = {
         input: "src/index.js",
         plugins: [
             wq(),
-            nodePolyfills(),
             babel({
                 plugins: ["@babel/transform-react-jsx"],
                 babelHelpers: "inline",
@@ -29,7 +26,6 @@ const config = {
             commonjs(),
             resolve(),
             terser({ keep_fnames: /^([A-Z]|use[A-Z])/ }), // Preserve component & hook names
-            json(),
             analyze({ limit: 10 }),
         ],
         output: {
@@ -63,10 +59,5 @@ export default [
                 return path.replace("./", "wq/markdown/");
             },
         },
-    },
-    {
-        ...config,
-        plugins: [replace(replaceConfig), ...config.plugins],
-        output: { ...config.output, file: "static/app/js/markdown.js" },
     },
 ];

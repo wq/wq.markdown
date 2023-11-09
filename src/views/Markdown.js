@@ -4,7 +4,7 @@ import gfm from "remark-gfm";
 import { List, View, ScrollView } from "@wq/material";
 import { useRenderContext, usePlugin } from "@wq/react";
 
-import renderers from "../renderers";
+import components from "../components";
 
 export default function Markdown({ children }) {
     const {
@@ -32,7 +32,10 @@ export default function Markdown({ children }) {
                         padding: "1em 2em",
                     }}
                 >
-                    <ReactMarkdown renderers={renderers} plugins={[gfm]}>
+                    <ReactMarkdown
+                        components={components}
+                        remarkPlugins={[gfm]}
+                    >
                         {markdown}
                     </ReactMarkdown>
                     {children}

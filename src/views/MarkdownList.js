@@ -31,13 +31,13 @@ export default function MarkdownList() {
 }
 
 function PageList({ tags }) {
-    const { list, empty, page_config } = useList(),
-        { page } = page_config,
+    const { list, page_config } = useList(),
         reverse = useReverse();
     return (
         <List>
             {list.map((item) => (
                 <ListItemLink
+                    key={item.id}
                     to={reverse(`${page_config.page}_detail`, item.id)}
                     icon={item.icon}
                 >
@@ -47,6 +47,7 @@ function PageList({ tags }) {
                             <View>
                                 {item[tags].map((tag) => (
                                     <Chip
+                                        key={tag.label}
                                         size="small"
                                         variant="outlined"
                                         {...tag}

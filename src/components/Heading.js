@@ -3,15 +3,15 @@ import { Typography } from "@wq/material";
 
 export default function Heading({ node, children, ...props }) {
     const variants = {
-        1: "h3",
-        2: "h4",
-        3: "h5",
-        4: "h6",
-        5: "subtitle1",
-        6: "subtitle2",
+        h1: "h3",
+        h2: "h4",
+        h3: "h5",
+        h4: "h6",
+        h5: "subtitle1",
+        h6: "subtitle2",
     };
     let id;
-    if (props.level > 1 && node.children[0].type === "text") {
+    if (node.tagName > "h1" && node.children[0].type === "text") {
         id = node.children[0].value
             .toLowerCase()
             .replace(/[^\w\- ]/g, "")
@@ -22,9 +22,9 @@ export default function Heading({ node, children, ...props }) {
             {...props}
             id={id}
             gutterBottom
-            variant={variants[props.level]}
+            variant={variants[node.tagName]}
             style={{
-                marginTop: props.level > 1 ? "0.8em" : null,
+                marginTop: node.tagName > "h1" ? "0.8em" : null,
             }}
         >
             {children}
